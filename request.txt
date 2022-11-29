@@ -1,0 +1,81 @@
+curl -v -X 'POST' \ 
+  'http://150.136.19.84:8080/loki/api/v1/push' \ 
+  -H 'accept: application/json' \ 
+  -H 'X-Scope-OrgID: docker' \ 
+  -H 'Content-Type: application/json' \ 
+  -d '{ 
+  "streams": [ 
+    { 
+      "stream": { 
+        "Application": "Malware", 
+        "fecha_hora": "Web", 
+        "alerta": "Adios", 
+        "usuario": "Andres", 
+        "IPOrigen": "192.168.1.2", 
+        "IPDestino": "192.168.1.1", 
+        "Actividad": "Hackeado", 
+        "Descripcion": "Algo", 
+        "Permisos": "xyz" 
+      } 
+    } 
+  ], 
+  "values": [ 
+    [ 
+      "1664439239000000000", 
+      "127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] GET /apache_pb.gif HTTP/1.0 200 2331" 
+    ] 
+  ] 
+}'
+
+
+curl -X 'POST' \ 
+  'http://150.136.19.84:8080/loki/api/v1/push' \
+  -H 'accept: application/json' \
+  -H 'X-Scope-OrgID: docker' \
+  -H 'Content-Type: application/json' \
+  -d' {
+    "streams": [
+        {
+            "stream": {
+                "Aplication": "Malware",
+                "fecha_hora": "2018-03-23T13:59:41.964828-0600",
+                "alerta": "alert",
+                "usuario": "Suricata",
+                "IPOrigen": "10.128.0.210",
+                "IPDestino": "10.47.3.218",
+                "Actividad": "allowed",
+                "Descripcion": "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+                "Permisos": "None"
+            }
+        }
+    ],
+    "values": [
+        "1669673368",
+        "2018-03-23T13:59:41.964828-0600 alert 10.128.0.210 -> 10.47.3.218 ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection"
+    ]  
+}'
+
+
+
+
+curl -v -H 'accept: application/json' -XPOST -s 'http://150.136.19.84:8080/loki/api/v1/push'-H 'X-Scope-OrgID: docker' -H 'Content-Type: application/json' --data-raw '{"streams": [{"stream": {"Application": "Malware", "fecha_hora": "Web", "alerta": "Adios", "usuario": "Andres", "IPOrigen": "192.168.1.2", "IPDestino": "192.168.1.1","Actividad": "Hackeado", "Descripcion": "Algo", "Permisos": "xyz"}}], "values":[["1664439239000000000", "127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] GET /apache_pb.gif HTTP/1.0 200 2331"]]}'
+
+
+curl -v -XPOST -s 'http://150.136.19.84:8080/loki/api/v1/push' -H "Content-Type: application/json" -H 'X-Scope-OrgID: docker' -H 'Content-Type: application/json' --data-raw \
+  '{"streams": [{ "stream": { "foo": "bar2" }, "values": [ [ "1570818238000000000", "fizzbuzz" ] ] }]}'
+ 
+curl -v -XPOST -s 'http://150.136.19.84:8080/loki/api/v1/push' -H "Content-Type: application/json" -H 'X-Scope-OrgID: docker' -H 'Content-Type: application/json' --data-raw \
+  '{"streams": [{"stream": {"Application": "Malware", "fecha_hora": "Web", "alerta": "Adios", "usuario": "Andres", "IPOrigen": "192.168.1.2", "IPDestino": "192.168.1.1","Actividad": "Hackeado", "Descripcion": "Algo", "Permisos": "xyz"}}], "values":[["1664439239000000000", "127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] GET /apache_pb.gif HTTP/1.0 200 2331"]]}'
+  
+curl -v -XPOST -s 'http://150.136.19.84:8080/loki/api/v1/push' -H "Content-Type: application/json" -H 'X-Scope-OrgID: docker' -H 'Content-Type: application/json' --data-raw \
+'{"streams": [{ "stream": { "foo1": "bar3" }, "values": [ [ "1669678326", "fizzbuzz" ] ] }]}'
+
+curl -v -XPOST -s 'http://150.136.19.84:8080/loki/api/v1/push' -H "Content-Type: application/json" -H 'X-Scope-OrgID: docker' -H 'Content-Type: application/json' --data-raw \
+'{"streams": [{ "stream": {"Application": "Malware", "fecha_hora": "Web", "alerta": "Adios", "usuario": "Andres", "IPOrigen": "192.168.1.2", "IPDestino": "192.168.1.1","Actividad": "Hackeado", "Descripcion": "Algo", "Permisos": "xyz"}, "values": [ [ "1669680594609948600", "fizzbuzz" ] ] }]}'
+
+
+[MAINPATH]
+suricata_path = ./eve.json
+
+[API]
+url = http://150.136.19.84:8080/loki/api/v1/push
