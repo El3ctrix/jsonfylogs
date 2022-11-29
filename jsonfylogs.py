@@ -113,7 +113,7 @@ def verify_configfile():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hta:p:",["help","api=","trickster","path="])
+        opts, args = getopt.getopt(argv,"ha:p:",["help","api=","path="])
     except getopt.GetoptError:
         print('Invalid arguments.')
         print('Usage: jsonfylogs.py [-a | --api] [-t | --trickster] [-p | --path <path>]')
@@ -126,9 +126,6 @@ def main(argv):
             elif opt in ("-a", "--api"):
                 # If this option is selected, is necesary to have in the config file the url of the api
                 checK_configfile('API', arg)
-            elif opt in ("-t", "--trickster"):
-                # This option works as a filter
-                print('Converting Trickster logs to JSON...')
             elif opt in ("-p", "--path"):
                 # This option will be used to specify the path to the logs
                 checK_configfile('MAINPATH', arg)
