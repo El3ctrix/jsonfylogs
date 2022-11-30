@@ -15,21 +15,22 @@ def send_json(json_list):
     api = config_object["API"]
     url = api["url"]
     headers = {'accept': 'application/json', 'X-Scope-OrgID': 'docker',  'Content-Type': 'application/json'}
-    data = json.dumps({"streams": [{"stream": {"Aplication": "Malware", 
-    "fecha_hora": json_list[1]["Fecha y hora"], 
-    "alerta": json_list[1]["Alerta/Anomalia"], 
-    "usuario": json_list[1]["Usuario"], 
-    "IPOrigen": json_list[1]["IPsource"], 
-    "IPDestino": json_list[1]["IPdestination"], 
-    "Actividad": json_list[1]["Actividad"], 
-    "Descripcion": json_list[1]["Descripcion"], 
-    "Permisos": json_list[1]["Permisos"]},
-    "values":[[str(time.time_ns()), "{} {} {} -> {} {}".format(json_list[1]["Fecha y hora"], 
-    json_list[1]["Alerta/Anomalia"], json_list[1]["IPsource"], json_list[1]["IPdestination"], 
-    json_list[1]["Descripcion"])]]}]}, indent = 4)
-    r = requests.post(url, headers=headers, data=data)
-    print(r.status_code)
-    print(r.content)
+    for record in json_list:
+        data = json.dumps({"streams": [{"stream": {"Aplication": "Malware", 
+        "fecha_hora": record["Fecha y hora"], 
+        "alerta": record["Alerta/Anomalia"], 
+        "usuario": record["Usuario"], 
+        "IPOrigen": record["IPsource"], 
+        "IPDestino": record["IPdestination"], 
+        "Actividad": record["Actividad"], 
+        "Descripcion": record["Descripcion"], 
+        "Permisos": record["Permisos"]},
+        "values":[[str(time.time_ns()), "{} {} {} -> {} {}".format(record["Fecha y hora"], 
+        record["Alerta/Anomalia"], record["IPsource"], record["IPdestination"], 
+        record["Descripcion"])]]}]}, indent = 4)
+        r = requests.post(url, headers=headers, data=data)
+        print(r.status_code)
+    print('All logs sent.')
 
 def suricata_jsonfylogs():
     """
