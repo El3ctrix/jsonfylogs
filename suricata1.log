@@ -1,0 +1,4 @@
+Jan  9 15:55:02 proyecto-cert suricata[4129]: Stopping suricata: Waiting . .  done.
+Jan  9 15:55:02 proyecto-cert suricata[4140]: Starting suricata in IDS (af-packet) mode... done.
+Jan  9 15:55:17 proyecto-cert suricata[4146]: {"timestamp":"2023-01-09T15:55:17.585011-0600","flow_id":785723687289358,"in_iface":"enp0s3","event_type":"dhcp","src_ip":"10.0.2.3","src_port":67,"dest_ip":"10.0.2.6","dest_port":68,"proto":"UDP","dhcp":{"type":"reply","id":2417241515,"client_mac":"08:00:27:a6:3b:b5","assigned_ip":"10.0.2.6","dhcp_type":"ack"}}
+Jan  9 15:55:17 proyecto-cert suricata[4146]: {"timestamp":"2023-01-09T15:55:17.592832-0600","flow_id":147220964117440,"in_iface":"enp0s3","event_type":"dns","src_ip":"10.0.2.6","src_port":59083,"dest_ip":"10.10.16.21","dest_port":53,"proto":"UDP","dns":{"type":"query","id":33619,"rrname":"connectivity-check.ubuntu.com","rrtype":"A","tx_id":0}}

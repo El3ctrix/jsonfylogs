@@ -29,7 +29,6 @@ def send_json(json_list):
         record["Alerta/Anomalia"], record["IPsource"], record["IPdestination"], 
         record["Descripcion"])]]}]}, indent = 4)
         r = requests.post(url, headers=headers, data=data)
-        print(r.status_code)
     print('All logs sent.')
 
 def suricata_jsonfylogs():
@@ -43,19 +42,25 @@ def suricata_jsonfylogs():
     config_object = ConfigParser()
     config_object.read("config.ini")
     suricatapath = config_object["MAINPATH"]["suricata_path"]
-    if(os.path.basename(suricatapath) == 'eve.json'):
+    if(os.path.basename(suricatapath) == 'suricata.log'):
         print('Suricata path is valid.')
-        with open(suricatapath) as f:
-            data = json.load(f)
-            for record in data:
+        f = open(suricatapath, "r")
+        line = line = f.readline()
+        while line:
+            if(not line.find('{') == -1):
+                index = line.index('{')
+                record = json.loads(line[index:])
                 if(record['event_type'] == 'alert'):
                     json_list.append({"Fecha y hora": record['timestamp'], 
                     "Alerta/Anomalia": record['event_type'], "Usuario": "Suricata", 
                     "IPsource": record['src_ip'], "IPdestination": record['dest_ip'], 
                     "Actividad": record['alert']['action'], "Descripcion": record['alert']['signature'], "Permisos": "None"})
+            line = f.readline()
+        f.close()
+            
     with open('suricata.json', 'w') as f:
         json.dump(json_list, f, ensure_ascii=False, indent = 4)
-    send_json(json_list)
+    #send_json(json_list)
 
 def checK_configfile(mode, arg):
     """
@@ -117,12 +122,12 @@ def main(argv):
         opts, args = getopt.getopt(argv,"ha:p:",["help","api=","path="])
     except getopt.GetoptError:
         print('Invalid arguments.')
-        print('Usage: jsonfylogs.py [-a | --api] [-t | --trickster] [-p | --path <path>]')
+        print('Usage: jsonfylogs.py [-a | --api]  [-p | --path <path>]')
         sys.exit(2)
     if len(opts) != 0:
         for opt, arg in opts:
             if opt in ("-h", "--help"):
-                print('Usage: jsonfylogs.py [-a | --api] [-t | --trickster] [-p | --path <path>]')
+                print('Usage: jsonfylogs.py [-a | --api]  [-p | --path <path>]')
                 sys.exit()
             elif opt in ("-a", "--api"):
                 # If this option is selected, is necesary to have in the config file the url of the api
@@ -132,7 +137,7 @@ def main(argv):
                 checK_configfile('MAINPATH', arg)
             else:
                 print('Invalid arguments.')
-                print('Usage: jsonfylogs.py [-a | --api] [-t | --trickster] [-p | --path <path>]')
+                print('Usage: jsonfylogs.py [-a | --api]  [-p | --path <path>]')
                 sys.exit(2)
     else:
         if os.path.exists('config.ini'):
@@ -143,7 +148,7 @@ def main(argv):
                 print('Run the script with the -p and -a option and specify the path to the logs and the URL for the API.')
         else:
             print('Config file does not exist, run the script with the -p and -a option and specify the path to the logs.')
-            print('Usage: jsonfylogs.py [-a | --api] [-t | --trickster] [-p | --path <path>]')
+            print('Usage: jsonfylogs.py [-a | --api]  [-p | --path <path>]')
             sys.exit(2)
 
 if __name__ == "__main__":
