@@ -42,20 +42,40 @@ def suricata_jsonfylogs():
     config_object = ConfigParser()
     config_object.read("config.ini")
     suricatapath = config_object["MAINPATH"]["suricata_path"]
-    if(os.path.basename(suricatapath) == 'suricata.log'):
+    last_valid_line = config_object["LINE"]["last_line"]
+    flag = False
+    if(os.path.basename(suricatapath) == 'suricata1.log'):
         print('Suricata path is valid.')
         f = open(suricatapath, "r")
-        line = line = f.readline()
+        line = f.readline()
+        if(not config_object["LINE"]["last_line"] == 'Nothing'):
+            while line:
+                if (not line.find(last_valid_line) == -1):
+                    flag = True
+                    line = f.readline()
+                    break
+                line = f.readline()
+        if(not flag):
+            f.seek(0)
+            line = f.readline()
         while line:
             if(not line.find('{') == -1):
                 index = line.index('{')
                 record = json.loads(line[index:])
+                last_valid_line = line[0:index]
+                print(last_valid_line)
                 if(record['event_type'] == 'alert'):
                     json_list.append({"Fecha y hora": record['timestamp'], 
                     "Alerta/Anomalia": record['event_type'], "Usuario": "Suricata", 
                     "IPsource": record['src_ip'], "IPdestination": record['dest_ip'], 
                     "Actividad": record['alert']['action'], "Descripcion": record['alert']['signature'], "Permisos": "None"})
             line = f.readline()
+        if(not last_valid_line == 'Nothing'):
+            config_object['LINE'] = {
+                'last_line': last_valid_line
+            }
+            with open('config.ini', 'w') as conf:
+                config_object.write(conf)
         f.close()
             
     with open('suricata.json', 'w') as f:

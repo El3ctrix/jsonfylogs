@@ -1,101 +1,11 @@
 [
     {
-        "Fecha y hora": "2023-01-09T16:02:32.960834-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "0000:0000:0000:0000:0000:0000:0000:0000",
-        "IPdestination": "ff02:0000:0000:0000:0000:0000:0000:0016",
-        "Actividad": "allowed",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T16:02:33.149624-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "0000:0000:0000:0000:0000:0000:0000:0000",
-        "IPdestination": "ff02:0000:0000:0000:0000:0001:ff05:e646",
-        "Actividad": "allowed",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T16:02:34.174976-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "fe80:0000:0000:0000:8511:6568:6c05:e646",
-        "IPdestination": "ff02:0000:0000:0000:0000:0000:0000:0016",
-        "Actividad": "allowed",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
         "Fecha y hora": "2023-01-09T16:02:34.317492-0600",
         "Alerta/Anomalia": "alert",
         "Usuario": "Suricata",
         "IPsource": "fe80:0000:0000:0000:8511:6568:6c05:e646",
         "IPdestination": "ff02:0000:0000:0000:0000:0000:0000:0002",
         "Actividad": "allowed",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T16:04:00.338966-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "fe80:0000:0000:0000:8511:6568:6c05:e646",
-        "IPdestination": "ff02:0000:0000:0000:0000:0000:0000:0016",
-        "Actividad": "allowed",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T18:18:53.626924-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "10.0.2.6",
-        "IPdestination": "31.13.89.35",
-        "Actividad": "blocked",
-        "Descripcion": "Facebook esta bloqueado",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T18:41:19.921121-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "31.13.89.35",
-        "IPdestination": "10.0.2.6",
-        "Actividad": "allowed",
-        "Descripcion": "SURICATA STREAM excessive retransmissions",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T18:44:37.550491-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "31.13.89.35",
-        "IPdestination": "10.0.2.6",
-        "Actividad": "allowed",
-        "Descripcion": "SURICATA Applayer Wrong direction first Data",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T19:24:33.444417-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "127.0.0.1",
-        "IPdestination": "127.0.0.53",
-        "Actividad": "blocked",
-        "Descripcion": "ICMP Packet found",
-        "Permisos": "None"
-    },
-    {
-        "Fecha y hora": "2023-01-09T19:24:33.445365-0600",
-        "Alerta/Anomalia": "alert",
-        "Usuario": "Suricata",
-        "IPsource": "127.0.0.1",
-        "IPdestination": "127.0.0.53",
-        "Actividad": "blocked",
         "Descripcion": "ICMP Packet found",
         "Permisos": "None"
     },
