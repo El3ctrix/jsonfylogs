@@ -80,7 +80,10 @@ def suricata_jsonfylogs():
             
     with open('suricata.json', 'w') as f:
         json.dump(json_list, f, ensure_ascii=False, indent = 4)
-    #send_json(json_list)
+    if(len(json_list) > 0):
+        send_json(json_list)
+    else:
+        print("The log file is empty")
 
 def checK_configfile(mode, arg):
     """
